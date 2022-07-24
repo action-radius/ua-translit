@@ -5,6 +5,7 @@ import os
 
 os.system('clear')
 print("UA - Translit V1.0")
+print("Hello, World! Testing GitHub.")
 
 def copy_button():
     text = entry2.get()
