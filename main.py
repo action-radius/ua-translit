@@ -41,11 +41,18 @@ label = Label(window,
 label.place(x=8, y=5)
 
 label2 = Label(window, 
-                text="Обери латиницю тут: ", 
+                text="Обери латинику тут: ", 
                 font=('Cantarell', 14, 'normal'), 
                 fg='black', 
                 bg='white')
 label2.place(x=215, y=308)
+
+label3 = Label(window, 
+                text="Мова: ", 
+                font=('Cantarell', 14, 'normal'), 
+                fg='black', 
+                bg='white')
+label3.place(x=605, y=5)
 
 
 # Text-area's: 
@@ -98,8 +105,18 @@ combo_box = ttk.Combobox(window,
                 "Avtorska",
                 "TKPN combo",
                 "TKPN diac",
-                "TKPN intl"])
+                "TKPN intl"],
+                width=12)
 
 combo_box.place(x=415, y=310)
+
+
+# Radio Buttons:
+radio_button1 = Radiobutton(window, text="BL", bg="white")
+radio_button1.place(x=665, y=8)
+
+radio_button2 = Radiobutton(window, text="UA", bg="white")
+radio_button2.place(x=720, y=8)
+
 
 window.mainloop()
