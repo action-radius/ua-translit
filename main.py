@@ -1,22 +1,26 @@
-import translit
+# Imports: 
+from translit import transliteration
 from tkinter import *
+from tkinter import ttk
 import os
-# from subprocess import Popen, PIPE
-# import pyperclip
 
 os.system('clear')
 print("UA - Translit V1.0")
 print("Hello, World! Testing GitHub.")
 
 
+# Functions: 
+def convert_func():
+    textarea2 = text2.get(1.0, 'end')
+    transliteration(textarea2)
+
 def copy_button():
-    text = text2.get()
+    text = text2.get(1.0, 'end')
     # pyperclip.copy(text)
     print(f'Copied: {text}')
 
-# widgets = GUI elements: buttons, textboxes, labels, images
-# windows = serves as a container to hold or contain these widgets
 
+# Window config.: 
 window = Tk()
 window.geometry("800x360")
 window.resizable(0, 0)
@@ -27,6 +31,8 @@ window.title("Translit")
 
 window.config(background="white")
 
+
+# Labels: 
 label = Label(window, 
                 text="Транслітерація з кирилиці на латиницю.", 
                 font=('Cantarell', 14, 'normal'), 
@@ -34,6 +40,15 @@ label = Label(window,
                 bg='white')
 label.place(x=8, y=5)
 
+label2 = Label(window, 
+                text="Обери латиницю тут: ", 
+                font=('Cantarell', 14, 'normal'), 
+                fg='black', 
+                bg='white')
+label2.place(x=215, y=308)
+
+
+# Text-area's: 
 text = Text(window, 
                 font=('Cantarell', 14, 'normal'),
                 fg="black",
@@ -47,19 +62,13 @@ text2 = Text(window,
                 state="disabled")
 text2.place(x=25, y=175, width=747, height=120)
 
-translate_button = Button(window, 
-                font=('Cantarell', 14, 'normal'),
-                command=None,
-                bg="#e3e3e3",
-                text="Convert",
-                fg="black")
-translate_button.place(x=122, y=308, width=80, height=38)
-translate_button["border"] = "1"
 
-# Icon
+# Icon: 
 photo = PhotoImage(file = r"/home/artemiy/git_workspace/ua-translit/copy_btn_icon.png")
 photoimage = photo.subsample(5, 4)
 
+
+# Buttons: 
 copying_button = Button(window, 
                 font=('Cantarell', 14, 'normal'),
                 command=copy_button,
@@ -70,5 +79,27 @@ copying_button = Button(window,
                 fg="black")
 copying_button.place(x=25, y=308, width=90, height=38)
 copying_button["border"] = "1"
+
+translate_button = Button(window, 
+                font=('Cantarell', 14, 'normal'),
+                command=convert_func,
+                bg="#e3e3e3",
+                text="Convert",
+                fg="black")
+translate_button.place(x=122, y=308, width=80, height=38)
+translate_button["border"] = "1"
+
+
+# Combo-Box: 
+combo_box = ttk.Combobox(window,
+                values=["Custom",
+                "ISO9",
+                "Nova Latynka",
+                "Avtorska",
+                "TKPN combo",
+                "TKPN diac",
+                "TKPN intl"])
+
+combo_box.place(x=415, y=310)
 
 window.mainloop()
