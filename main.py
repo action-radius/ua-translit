@@ -2,6 +2,7 @@
 from translit import transliteration
 from tkinter import *
 from tkinter import ttk
+import pyperclip
 import os
 
 os.system('clear')
@@ -54,7 +55,8 @@ text.place(x=25, y=45, width=747, height=120)
 text2 = Text(window, 
                 font=('Cantarell', 14, 'normal'),
                 fg="black",
-                bg="white")
+                bg="white",
+                state="disabled")
 text2.place(x=25, y=175, width=747, height=120)
 
 
@@ -69,8 +71,7 @@ def convert_func():
 
 def copy_button():
     text = text2.get(1.0, 'end')
-    # pyperclip.copy(text)
-    print(f'Copied: {text}')
+    pyperclip.copy(text)
 
 
 # Icon: 
