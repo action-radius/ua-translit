@@ -2,6 +2,7 @@
 from translit import transliteration
 from tkinter import *
 from tkinter import ttk
+import pyperclip
 import os
 
 os.system('clear')
@@ -11,12 +12,16 @@ print("Hello, World! Testing GitHub.")
 
 # Functions: 
 def convert_func():
-    textarea2 = text2.get(1.0, 'end')
-    transliteration(textarea2)
+    textarea1 = text.get(1.0, 'end')
+    out = transliteration(textarea1)
+    text2.configure(state='normal')
+    text2.delete(1.0, 'end')
+    text2.insert(1.0, out)
+    text2.configure(state='disabled')
 
 def copy_button():
     text = text2.get(1.0, 'end')
-    # pyperclip.copy(text)
+    pyperclip.copy(text)
     print(f'Copied: {text}')
 
 
