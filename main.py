@@ -7,7 +7,6 @@ import os
 
 os.system('clear')
 print("UA - Translit V1.0")
-print("Hello, World! Testing GitHub.")
 
 
 # Functions: 
@@ -18,6 +17,10 @@ def convert_func():
     text2.delete(1.0, 'end')
     text2.insert(1.0, out)
     text2.configure(state='disabled')
+    result = text2.get(1.0, 'end')
+    os.system('clear')
+    print("UA - Translit V1.0")
+    print(f"Source: \n{textarea1}--------------\nTranslit: \n{result}")
 
 def copy_button():
     text = text2.get(1.0, 'end')
@@ -105,7 +108,7 @@ combo_box = ttk.Combobox(window,
                 "TKPN diac",
                 "TKPN intl"],
                 width=12)
-
+                
 combo_box.place(x=415, y=310)
 
 window.mainloop()
