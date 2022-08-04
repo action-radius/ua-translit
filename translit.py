@@ -5,6 +5,7 @@ from latin.TKPN_diac import TKPN_diac
 from latin.TKPN_intl import TKPN_intl
 from latin.custom import custom
 from latin.iso9 import iso9
+from main import x_choice
 
 vowels = {
     "а": True,
@@ -24,11 +25,11 @@ for1994diac = ["с", "р", "п", "м", "з", "д", "в", "б"]
 for1994diac_upper = ["С", "Р", "П", "З", "Д", "В", "Б"]
 for1994diac_choice = [4, 5, 6]
 
+choice = x_choice
 def transliteration(message):
     output = ""
     lower_dictionary = custom
     isPreviousLetterConsonant = False
-    choice = "1"
 
     if choice == "1":
         lower_dictionary = custom
