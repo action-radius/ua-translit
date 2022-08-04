@@ -16,9 +16,9 @@ def convert_func():
     c_box = combo_box.get()
     label4.configure(text=c_box)
     # if c_box == "Custom":
-    #     x_choice = "1"
+    #     choice = "1"
     # else:
-    #     x_choice = "2"
+    #     choice = "2"
 
     textarea1 = text.get(1.0, 'end')
     out = transliteration(textarea1)
