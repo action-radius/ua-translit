@@ -20,28 +20,28 @@ vowels = {
 }
 
 forCustom = ["а", "е", "у"]
-# for1994diac = ["с", "р", "п", "м", "з", "д", "в", "б"]
-# for1994diac_upper = ["С", "Р", "П", "З", "Д", "В", "Б"]
-# for1994diac_choice = [4, 5, 6]
+for1994diac = ["с", "р", "п", "м", "з", "д", "в", "б"]
+for1994diac_upper = ["С", "Р", "П", "З", "Д", "В", "Б"]
+for1994diac_choice = [4, 5, 6]
 
 def transliteration(message):
-    choice = 1
     output = ""
     lower_dictionary = custom
     isPreviousLetterConsonant = False
+    choice = "1"
 
-    # if choice == "1":
-    #     lower_dictionary = custom
-    # if choice == "2":
-    #     lower_dictionary = iso9
-    # if choice == "3":
-    #     lower_dictionary = NovaLatynka
-    # if choice == "4":
-    #     lower_dictionary = TKPN_diac
-    # if choice == "5":
-    #     lower_dictionary = TKPN_combo
-    # if choice == "6":
-    #     lower_dictionary = TKPN_intl
+    if choice == "1":
+        lower_dictionary = custom
+    if choice == "2":
+        lower_dictionary = iso9
+    if choice == "3":
+        lower_dictionary = NovaLatynka
+    if choice == "4":
+        lower_dictionary = TKPN_diac
+    if choice == "5":
+        lower_dictionary = TKPN_combo
+    if choice == "6":
+        lower_dictionary = TKPN_intl
 
     for index, i in enumerate(message):
         if index + 1 != len(message):
@@ -63,14 +63,14 @@ def transliteration(message):
                 if i == "і" and nextLetter in forCustom:
                     l = "í"
             ###########################################################
-            # if choice in for1994diac_choice:
-            #     if lowered == "й" and i != message[0]:
-            #         if message[index - 2] in for1994diac and nextLetter == "о":
-            #             l = "'j"
+            if choice in for1994diac_choice:
+                if lowered == "й" and i != message[0]:
+                    if message[index - 2] in for1994diac and nextLetter == "о":
+                        l = "'j"
 
-            #     if lowered == "й" and i != message[0]:
-            #         if message[index - 2] in for1994diac_upper and nextLetter == "О":
-            #             l = "'j"
+                if lowered == "й" and i != message[0]:
+                    if message[index - 2] in for1994diac_upper and nextLetter == "О":
+                        l = "'j"
             ###########################################################
  
             isPreviousLetterConsonant = lowered not in vowels

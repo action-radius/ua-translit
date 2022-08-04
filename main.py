@@ -8,9 +8,18 @@ import os
 os.system('clear')
 print("UA - Translit V1.0")
 
-
 # Functions: 
 def convert_func():
+    # combo-box value getting:
+    global x_choice
+    x_choice = "1"
+    c_box = combo_box.get()
+    label4.configure(text=c_box)
+    # if c_box == "Custom":
+    #     x_choice = "1"
+    # else:
+    #     x_choice = "2"
+
     textarea1 = text.get(1.0, 'end')
     out = transliteration(textarea1)
     text2.configure(state='normal')
@@ -19,6 +28,7 @@ def convert_func():
     text2.configure(state='disabled')
     result = text2.get(1.0, 'end')
     os.system('clear')
+    # Console printing
     print("UA - Translit V1.0")
     print(f"Source: \n{textarea1}--------------\nTranslit: \n{result}")
 
@@ -54,6 +64,20 @@ label2 = Label(window,
                 fg='black', 
                 bg='white')
 label2.place(x=215, y=308)
+
+label3 = Label(window, 
+                text="Обрана латинка: ", 
+                font=('Cantarell', 14, 'normal'), 
+                fg='black', 
+                bg='white')
+label3.place(x=500, y=5)
+
+label4 = Label(window, 
+                font=('Cantarell', 14, 'normal'), 
+                fg='black', 
+                bg='white')
+label4.place(x=660, y=5)
+
 
 
 # Text-area's: 
@@ -108,7 +132,6 @@ combo_box = ttk.Combobox(window,
                 "TKPN diac",
                 "TKPN intl"],
                 width=12)
-                
-combo_box.place(x=415, y=310)
 
+combo_box.place(x=415, y=310)
 window.mainloop()
