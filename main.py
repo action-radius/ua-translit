@@ -8,17 +8,17 @@ import os
 os.system('clear')
 print("UA - Translit V1.0")
 
+x_choice = ""
 # Functions: 
 def convert_func():
     # combo-box value getting:
     global x_choice
-    x_choice = "1"
     c_box = combo_box.get()
     label4.configure(text=c_box)
-    # if c_box == "Custom":
-    #     choice = "1"
-    # else:
-    #     choice = "2"
+    if c_box == "Custom":
+        x_choice = "1"
+    else:
+        x_choice = "2"
 
     textarea1 = text.get(1.0, 'end')
     out = transliteration(textarea1)
