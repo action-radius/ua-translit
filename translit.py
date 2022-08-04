@@ -1,35 +1,19 @@
 # Imports
+from latin.TKPN_diac import TKPN_diac, for1994diac
+from latin.abecadło import abecadło, for_abecadło
+from latin.custom import custom, forCustom
 from latin.NovaLatynka import NovaLatynka
 from latin.TKPN_combo import TKPN_combo
-from latin.TKPN_diac import TKPN_diac
 from latin.TKPN_intl import TKPN_intl
-from latin.custom import custom
+from latin.custom_pl import custom_pl
+from latin.vowels import vowels
 from latin.iso9 import iso9
-from main import x_choice
 
-vowels = {
-    "а": True,
-    "е": True,
-    "є": True,
-    "и": True,
-    "і": True,
-    "ї": True,
-    "о": True,
-    "у": True,
-    "ю": True,
-    "я": True
-}
-
-forCustom = ["а", "е", "у"]
-for1994diac = ["с", "р", "п", "м", "з", "д", "в", "б"]
-for1994diac_upper = ["С", "Р", "П", "З", "Д", "В", "Б"]
-for1994diac_choice = [4, 5, 6]
-
-choice = x_choice
 def transliteration(message):
     output = ""
     lower_dictionary = custom
     isPreviousLetterConsonant = False
+    choice = "8"
 
     if choice == "1":
         lower_dictionary = custom
@@ -43,6 +27,10 @@ def transliteration(message):
         lower_dictionary = TKPN_combo
     if choice == "6":
         lower_dictionary = TKPN_intl
+    if choice == "7":
+        lower_dictionary = custom_pl
+    if choice == "8":
+        lower_dictionary = abecadło
 
     for index, i in enumerate(message):
         if index + 1 != len(message):
@@ -55,23 +43,42 @@ def transliteration(message):
             l = lower_dictionary[lowered]
  
             ###########################################################
-            if choice == "1":
+            if choice == "1" or choice == "8" or choice == "7":
                 if len(l) == 2 and l[0] == 'j':
                     if isPreviousLetterConsonant:
                         l = 'i' + l[1]
             ###########################################################
             if choice == "1":
-                if i == "і" and nextLetter in forCustom:
-                    l = "í"
+                if i.lower() == "і" and nextLetter.lower() in forCustom:
+                    if i.islower(): 
+                        l = "í"
+                    else:
+                        l = "í"
+                        l.upper()
             ###########################################################
-            if choice in for1994diac_choice:
+            if choice == "4" or choice == "5" or choice == "6":
                 if lowered == "й" and i != message[0]:
-                    if message[index - 2] in for1994diac and nextLetter == "о":
-                        l = "'j"
-
-                if lowered == "й" and i != message[0]:
-                    if message[index - 2] in for1994diac_upper and nextLetter == "О":
-                        l = "'j"
+                    msg_m2 = message[index - 2]
+                    if msg_m2.lower() in for1994diac and nextLetter.lower() == "о":
+                        if i.islower():
+                            l = "'j"
+                        else:
+                            l = "'J"
+            ###########################################################
+            if choice == "7" and lowered == "і":
+                if nextLetter.lower() in forCustom:
+                    if i.islower():
+                        l = "i'"
+                    else:
+                        l = "I'"
+            ###########################################################
+            if choice == "8" and lowered in for_abecadło:
+                if nextLetter.lower() == "ь":
+                    if i.isupper():
+                        l = for_abecadło[lowered]
+                        l.upper()
+                    else:
+                        l = for_abecadło[lowered]
             ###########################################################
  
             isPreviousLetterConsonant = lowered not in vowels
