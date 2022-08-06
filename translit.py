@@ -10,10 +10,12 @@ from latin.vowels import vowels
 from latin.iso9 import iso9
 
 def transliteration(message):
+    # global x
     output = ""
+    # choice = x
+    choice = "8"
     lower_dictionary = custom
     isPreviousLetterConsonant = False
-    choice = "8"
 
     if choice == "1":
         lower_dictionary = custom

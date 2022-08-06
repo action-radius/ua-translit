@@ -1,4 +1,6 @@
 # Imports: 
+from tkinter import scrolledtext
+from latin.dict_of_latins import x_dict
 from translit import transliteration
 from tkinter import *
 from tkinter import ttk
@@ -7,16 +9,15 @@ import os
 
 os.system('clear')
 print("UA - Translit V1.0")
-
 # Functions: 
+
 def convert_func():
-    # combo-box value getting:
-    c_box = combo_box.get()
-    label4.configure(text=c_box)
-    # if c_box == "Custom":
-    #     x_choice = "1"
-    # else:
-    #     x_choice = "2"
+    # global x
+    # combo-box value getting: 
+    # c_box = combo_box.get()
+    # label4.configure(text=c_box)
+    # if c_box in x_dict:
+    #     x = x_dict[x]
 
     textarea1 = text.get(1.0, 'end')
     out = transliteration(textarea1)
@@ -25,8 +26,8 @@ def convert_func():
     text2.insert(1.0, out)
     text2.configure(state='disabled')
     result = text2.get(1.0, 'end')
-    os.system('clear')
     # Console printing
+    os.system('clear')
     print("UA - Translit V1.0")
     print(f"Source: \n{textarea1}--------------\nTranslit: \n{result}")
 
@@ -63,20 +64,6 @@ label2 = Label(window,
                 bg='white')
 label2.place(x=215, y=308)
 
-label3 = Label(window, 
-                text="Обрана латинка: ", 
-                font=('Cantarell', 14, 'normal'), 
-                fg='black', 
-                bg='white')
-label3.place(x=500, y=5)
-
-label4 = Label(window, 
-                font=('Cantarell', 14, 'normal'), 
-                fg='black', 
-                bg='white')
-label4.place(x=660, y=5)
-
-
 
 # Text-area's: 
 text = Text(window, 
@@ -91,6 +78,23 @@ text2 = Text(window,
                 bg="white",
                 state="disabled")
 text2.place(x=25, y=175, width=747, height=120)
+
+
+##############################################
+
+# Sproba zrobyty kostyl' -- Doesn't work 
+
+# testing_func = text.get(1.0, 'end')
+# if len(testing_func) > 1:
+#     while len(testing_func) > 1:
+#         cout = transliteration(testing_func)
+#         text2.configure(state='normal')
+#         text2.delete(1.0, 'end')
+#         text2.insert(1.0, cout)
+#         text2.configure(state='disabled')
+#         result = text2.get(1.0, 'end')
+
+##############################################
 
 
 # Icon: 
@@ -125,13 +129,12 @@ combo_box = ttk.Combobox(window,
                 values=["Custom",
                 "ISO9",
                 "Nova Latynka",
-                "Avtorska",
                 "TKPN combo",
                 "TKPN diac",
                 "TKPN intl",
                 "Custom_PL",
-                "Abecadło"],
+                "Abecadło",
+                "Avtorska"],
                 width=12)
-
 combo_box.place(x=415, y=310)
 window.mainloop()
