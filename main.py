@@ -7,7 +7,6 @@ import pyperclip
 import os
 
 os.system('clear')
-print("UA - Translit V1.0")
 
 # Functions: 
 def convert_func():
@@ -23,16 +22,10 @@ def convert_func():
     text2.delete(1.0, 'end')
     text2.insert(1.0, out)
     text2.configure(state='disabled')
-    result = text2.get(1.0, 'end')
-    # Console printing
-    os.system('clear')
-    print("UA - Translit V1.0")
-    print(f"Source: \n{textarea1}--------------\nTranslit: \n{result}")
 
 def copy_button():
     text = text2.get(1.0, 'end')
     pyperclip.copy(text)
-    print(f'Copied: {text}')
 
 
 # Window config.: 
@@ -95,7 +88,7 @@ text2.place(x=25, y=175, width=747, height=120)
 ##############################################
 
 
-# Icon: 
+# Icon of copy button: 
 photo = PhotoImage(file = r"/home/artemiy/git_workspace/ua-translit/copy_btn_icon.png")
 photoimage = photo.subsample(5, 4)
 
@@ -132,8 +125,9 @@ combo_box = ttk.Combobox(window,
                 "TKPN intl",
                 "Custom_PL",
                 "Abecadło",
-                "Avtorska"],
-                width=12)
+                "Official KMU 2010"],
+                width=16,
+                state="readonly")
 combo_box.place(x=415, y=310)
 combo_box.current(0)
 window.mainloop()

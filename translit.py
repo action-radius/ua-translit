@@ -1,7 +1,8 @@
 # Imports
+from latin.custom import custom, forCustom, forCustom2
 from latin.TKPN_diac import TKPN_diac, for1994diac
 from latin.abecadło import abecadło, for_abecadło
-from latin.custom import custom, forCustom
+from latin.official_KMU_2010 import of_kmu
 from latin.NovaLatynka import NovaLatynka
 from latin.TKPN_combo import TKPN_combo
 from latin.TKPN_intl import TKPN_intl
@@ -30,6 +31,8 @@ def transliteration(choice, message):
         lower_dictionary = custom_pl
     if choice == "8":
         lower_dictionary = abecadło
+    if choice == "9":
+        lower_dictionary = of_kmu
 
     for index, i in enumerate(message):
         if index + 1 != len(message):
@@ -42,8 +45,27 @@ def transliteration(choice, message):
             l = lower_dictionary[lowered]
  
             ###########################################################
+            if choice == "9":
+                if len(l) > 1 and i.lower() in forCustom2:
+                    if i == message[0] or message[index - 2] == " ":
+                        l = "y" + l[1]
+                        if i.isupper():
+                            l.upper()
+
+                if i.lower() == "ї":
+                    if i == message[0] or message[index - 2] == " ":
+                        l = "yi"
+                        if i.isupper():
+                            l.upper()
+                    
+                if i.lower() == "й":
+                    if i == message[0] or message[index - 2] == " ":
+                        l = "y"
+                        if i.isupper():
+                            l.upper()
+            ###########################################################
             if choice == "1" or choice == "8" or choice == "7":
-                if len(l) == 2 and l[0] == 'j':
+                if len(l) == 2 and l[0].lower() == 'j':
                     if isPreviousLetterConsonant:
                         l = 'i' + l[1]
             ###########################################################
@@ -92,8 +114,8 @@ def transliteration(choice, message):
 # ТКПН Вакуленко 1994 diac
 # ТКПН Вакуленко 1994 combo
 # ТКПН Вакуленко 1994 intl
+# Official КМУ 2010
 
 #############################
-# Official КМУ 2010         #
 # Avtorśka                  #
 #############################
