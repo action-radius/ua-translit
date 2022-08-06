@@ -1,5 +1,4 @@
 # Imports: 
-from tkinter import scrolledtext
 from latin.dict_of_latins import x_dict
 from translit import transliteration
 from tkinter import *
@@ -9,18 +8,17 @@ import os
 
 os.system('clear')
 print("UA - Translit V1.0")
-# Functions: 
 
+# Functions: 
 def convert_func():
-    # global x
     # combo-box value getting: 
-    # c_box = combo_box.get()
-    # label4.configure(text=c_box)
-    # if c_box in x_dict:
-    #     x = x_dict[x]
+    c_box = combo_box.get()
 
     textarea1 = text.get(1.0, 'end')
-    out = transliteration(textarea1)
+    # Choose latin using combo-box's value
+    if c_box in x_dict:
+        choosing = x_dict[c_box]
+        out = transliteration(choosing, textarea1)
     text2.configure(state='normal')
     text2.delete(1.0, 'end')
     text2.insert(1.0, out)
@@ -137,4 +135,5 @@ combo_box = ttk.Combobox(window,
                 "Avtorska"],
                 width=12)
 combo_box.place(x=415, y=310)
+combo_box.current(0)
 window.mainloop()

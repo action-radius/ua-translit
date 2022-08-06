@@ -9,11 +9,8 @@ from latin.custom_pl import custom_pl
 from latin.vowels import vowels
 from latin.iso9 import iso9
 
-def transliteration(message):
-    # global x
+def transliteration(choice, message):
     output = ""
-    # choice = x
-    choice = "8"
     lower_dictionary = custom
     isPreviousLetterConsonant = False
 
@@ -50,37 +47,25 @@ def transliteration(message):
                     if isPreviousLetterConsonant:
                         l = 'i' + l[1]
             ###########################################################
-            if choice == "1":
+            if choice == "1" or choice == "7":
                 if i.lower() == "і" and nextLetter.lower() in forCustom:
-                    if i.islower(): 
-                        l = "í"
-                    else:
-                        l = "í"
+                    l = "i'"
+                    if i.isupper(): 
                         l.upper()
             ###########################################################
             if choice == "4" or choice == "5" or choice == "6":
                 if lowered == "й" and i != message[0]:
                     msg_m2 = message[index - 2]
                     if msg_m2.lower() in for1994diac and nextLetter.lower() == "о":
-                        if i.islower():
-                            l = "'j"
-                        else:
-                            l = "'J"
-            ###########################################################
-            if choice == "7" and lowered == "і":
-                if nextLetter.lower() in forCustom:
-                    if i.islower():
-                        l = "i'"
-                    else:
-                        l = "I'"
+                        l = "'j"
+                        if i.isupper():
+                            l.upper()
             ###########################################################
             if choice == "8" and lowered in for_abecadło:
                 if nextLetter.lower() == "ь":
+                    l = for_abecadło[lowered]
                     if i.isupper():
-                        l = for_abecadło[lowered]
                         l.upper()
-                    else:
-                        l = for_abecadło[lowered]
             ###########################################################
  
             isPreviousLetterConsonant = lowered not in vowels
@@ -96,8 +81,6 @@ def transliteration(message):
                             l = l.title()
                     else: 
                         l = l.title()
-            if l == "'j" and i.isupper():
-                l = l.upper()
         else:
             isPreviousLetterConsonant = False
         output += l
