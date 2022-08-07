@@ -1,5 +1,5 @@
 # Imports
-from latin.custom import custom, custom_pl, forCustom, forCustom2
+from latin.custom import custom, forCustom, forKMU2010
 from latin.TKPN_diac import TKPN_diac, for1994diac
 from latin.abecadło import abecadło, for_abecadło
 from latin.official_KMU_2010 import of_kmu
@@ -40,26 +40,9 @@ def transliteration(choice, message):
         if lowered in lower_dictionary:
             nextLetter = message[index]
             l = lower_dictionary[lowered]
+            if message[index - 2] == "'":
+                isPreviousLetterConsonant = False
  
-            ###########################################################
-            if choice == "8":
-                if len(l) > 1 and i.lower() in forCustom2:
-                    if i == message[0] or message[index - 2] == " ":
-                        l = "y" + l[1]
-                        if i.isupper():
-                            l.upper()
-
-                if i.lower() == "ї":
-                    if i == message[0] or message[index - 2] == " ":
-                        l = "yi"
-                        if i.isupper():
-                            l.upper()
-                    
-                if i.lower() == "й":
-                    if i == message[0] or message[index - 2] == " ":
-                        l = "y"
-                        if i.isupper():
-                            l.upper()
             ###########################################################
             if choice == "1" or choice == "7":
                 if len(l) == 2 and l[0].lower() == 'j':
@@ -67,24 +50,31 @@ def transliteration(choice, message):
                         l = 'i' + l[1]
             ###########################################################
             if choice == "1":
-                if i.lower() == "і" and nextLetter.lower() in forCustom:
+                if lowered == "і" and nextLetter.lower() in forCustom:
                     l = "i'"
-                    if i.isupper(): 
-                        l.upper()
             ###########################################################
             if choice == "4" or choice == "5" or choice == "6":
                 if lowered == "й" and i != message[0]:
                     msg_m2 = message[index - 2]
                     if msg_m2.lower() in for1994diac and nextLetter.lower() == "о":
                         l = "'j"
-                        if i.isupper():
-                            l.upper()
             ###########################################################
             if choice == "7" and lowered in for_abecadło:
                 if nextLetter.lower() == "ь":
                     l = for_abecadło[lowered]
-                    if i.isupper():
-                        l.upper()
+            ###########################################################
+            if choice == "8":
+                if len(l) > 1 and lowered in forKMU2010:
+                    if i == message[0] or message[index - 2] == " ":
+                        l = "y" + l[1]
+
+                if lowered == "ї":
+                    if i == message[0] or message[index - 2] == " ":
+                        l = "yi"
+                    
+                if lowered == "й":
+                    if i == message[0] or message[index - 2] == " ":
+                        l = "y"
             ###########################################################
  
             isPreviousLetterConsonant = lowered not in vowels
@@ -94,10 +84,15 @@ def transliteration(choice, message):
             else:
                 if i.isupper():
                     if len(message) != 1:
-                        if nextLetter.isupper():
+                        if nextLetter.isupper() or nextLetter == "'":
                             l = l.upper()
                         if nextLetter.islower() or nextLetter.lower() not in lower_dictionary:
                             l = l.title()
+                        if i != message[0]:
+                            if message[index - 2].isupper() and i.isupper():
+                                l = l.upper()
+                            if message[index - 2].isupper() and nextLetter.islower():
+                                l = l.title()
                     else: 
                         l = l.title()
         else:
@@ -112,3 +107,12 @@ def transliteration(choice, message):
 # ТКПН Вакуленко 1994 combo
 # ТКПН Вакуленко 1994 intl
 # Official КМУ 2010
+
+# custom, custom_pl
+# iso9
+# TKPN_diac
+# abecadło
+# official_KMU_2010
+# NovaLatynka
+# TKPN_combo
+# TKPN_intl
