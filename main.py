@@ -71,23 +71,6 @@ text2 = Text(window,
 text2.place(x=25, y=175, width=747, height=120)
 
 
-##############################################
-
-# Sproba zrobyty kostyl' -- Doesn't work 
-
-# testing_func = text.get(1.0, 'end')
-# if len(testing_func) > 1:
-#     while len(testing_func) > 1:
-#         cout = transliteration(testing_func)
-#         text2.configure(state='normal')
-#         text2.delete(1.0, 'end')
-#         text2.insert(1.0, cout)
-#         text2.configure(state='disabled')
-#         result = text2.get(1.0, 'end')
-
-##############################################
-
-
 # Icon of copy button: 
 photo = PhotoImage(file = r"/home/artemiy/git_workspace/ua-translit/copy_btn_icon.png")
 photoimage = photo.subsample(5, 4)
@@ -123,7 +106,6 @@ combo_box = ttk.Combobox(window,
                 "TKPN combo",
                 "TKPN diac",
                 "TKPN intl",
-                "Custom_PL",
                 "Abecadło",
                 "Official KMU 2010"],
                 width=16,

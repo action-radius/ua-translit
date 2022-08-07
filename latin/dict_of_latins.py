@@ -5,8 +5,6 @@ x_dict = {
     "TKPN combo": "4",
     "TKPN diac": "5",
     "TKPN intl": "6",
-    "Custom_PL": "7",
-    "Abecadło": "8",
-    "Official KMU 2010": "9",
-    # "Avtorśka",
+    "Abecadło": "7",
+    "Official KMU 2010": "8"
 }

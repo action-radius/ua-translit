@@ -1,12 +1,11 @@
 # Imports
-from latin.custom import custom, forCustom, forCustom2
+from latin.custom import custom, custom_pl, forCustom, forCustom2
 from latin.TKPN_diac import TKPN_diac, for1994diac
 from latin.abecadło import abecadło, for_abecadło
 from latin.official_KMU_2010 import of_kmu
 from latin.NovaLatynka import NovaLatynka
 from latin.TKPN_combo import TKPN_combo
 from latin.TKPN_intl import TKPN_intl
-from latin.custom_pl import custom_pl
 from latin.vowels import vowels
 from latin.iso9 import iso9
 
@@ -28,10 +27,8 @@ def transliteration(choice, message):
     if choice == "6":
         lower_dictionary = TKPN_intl
     if choice == "7":
-        lower_dictionary = custom_pl
-    if choice == "8":
         lower_dictionary = abecadło
-    if choice == "9":
+    if choice == "8":
         lower_dictionary = of_kmu
 
     for index, i in enumerate(message):
@@ -45,7 +42,7 @@ def transliteration(choice, message):
             l = lower_dictionary[lowered]
  
             ###########################################################
-            if choice == "9":
+            if choice == "8":
                 if len(l) > 1 and i.lower() in forCustom2:
                     if i == message[0] or message[index - 2] == " ":
                         l = "y" + l[1]
@@ -64,12 +61,12 @@ def transliteration(choice, message):
                         if i.isupper():
                             l.upper()
             ###########################################################
-            if choice == "1" or choice == "8" or choice == "7":
+            if choice == "1" or choice == "7":
                 if len(l) == 2 and l[0].lower() == 'j':
                     if isPreviousLetterConsonant:
                         l = 'i' + l[1]
             ###########################################################
-            if choice == "1" or choice == "7":
+            if choice == "1":
                 if i.lower() == "і" and nextLetter.lower() in forCustom:
                     l = "i'"
                     if i.isupper(): 
@@ -83,7 +80,7 @@ def transliteration(choice, message):
                         if i.isupper():
                             l.upper()
             ###########################################################
-            if choice == "8" and lowered in for_abecadło:
+            if choice == "7" and lowered in for_abecadło:
                 if nextLetter.lower() == "ь":
                     l = for_abecadło[lowered]
                     if i.isupper():
@@ -108,14 +105,10 @@ def transliteration(choice, message):
         output += l
     return output
 
-# Моя латинка
+# Custom
 # ISO9 ГОСТ 7.79 А
 # Nova Latynka
 # ТКПН Вакуленко 1994 diac
 # ТКПН Вакуленко 1994 combo
 # ТКПН Вакуленко 1994 intl
 # Official КМУ 2010
-
-#############################
-# Avtorśka                  #
-#############################
