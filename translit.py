@@ -38,6 +38,7 @@ def transliteration(choice, message):
         l = i
  
         if lowered in lower_dictionary:
+            prevLetter = message[index - 2]
             nextLetter = message[index]
             l = lower_dictionary[lowered]
             if message[index - 2] == "'":
@@ -62,18 +63,22 @@ def transliteration(choice, message):
             if choice == "7" and lowered in for_abecadło:
                 if nextLetter.lower() == "ь":
                     l = for_abecadło[lowered]
+            
+            if choice == "7" and lowered in forKMU2010:
+                if prevLetter.lower() == "ь":
+                    l = abecadło[i]
             ###########################################################
             if choice == "8":
                 if len(l) > 1 and lowered in forKMU2010:
-                    if i == message[0] or message[index - 2] == " ":
+                    if i == message[0] or prevLetter == " ":
                         l = "y" + l[1]
 
                 if lowered == "ї":
-                    if i == message[0] or message[index - 2] == " ":
+                    if i == message[0] or prevLetter == " ":
                         l = "yi"
                     
                 if lowered == "й":
-                    if i == message[0] or message[index - 2] == " ":
+                    if i == message[0] or prevLetter == " ":
                         l = "y"
             ###########################################################
  
@@ -103,16 +108,8 @@ def transliteration(choice, message):
 # Custom
 # ISO9 ГОСТ 7.79 А
 # Nova Latynka
-# ТКПН Вакуленко 1994 diac
 # ТКПН Вакуленко 1994 combo
+# ТКПН Вакуленко 1994 diac
 # ТКПН Вакуленко 1994 intl
+# Abecadło
 # Official КМУ 2010
-
-# custom, custom_pl
-# iso9
-# TKPN_diac
-# abecadło
-# official_KMU_2010
-# NovaLatynka
-# TKPN_combo
-# TKPN_intl
