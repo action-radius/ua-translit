@@ -1,6 +1,7 @@
 # Imports: 
 from latin.dict_of_latins import x_dict
 from translit import transliteration
+from threading import Timer
 from tkinter import *
 from tkinter import ttk
 import pyperclip
@@ -22,6 +23,7 @@ def convert_func():
     text2.delete(1.0, 'end')
     text2.insert(1.0, out)
     text2.configure(state='disabled')
+    Timer(0.01, convert_func).start()
 
 def copy_button():
     text = text2.get(1.0, 'end')
@@ -53,7 +55,7 @@ label2 = Label(window,
                 font=('Cantarell', 14, 'normal'), 
                 fg='black', 
                 bg='white')
-label2.place(x=215, y=308)
+label2.place(x=424, y=308)
 
 
 # Text-area's: 
@@ -88,14 +90,14 @@ copying_button = Button(window,
 copying_button.place(x=25, y=308, width=90, height=38)
 copying_button["border"] = "1"
 
-translate_button = Button(window, 
-                font=('Cantarell', 14, 'normal'),
-                command=convert_func,
-                bg="#e3e3e3",
-                text="Convert",
-                fg="black")
-translate_button.place(x=122, y=308, width=80, height=38)
-translate_button["border"] = "1"
+# translate_button = Button(window, 
+#                 font=('Cantarell', 14, 'normal'),
+#                 command=convert_func,
+#                 bg="#e3e3e3",
+#                 text="Convert",
+#                 fg="black")
+# translate_button.place(x=122, y=308, width=80, height=38)
+# translate_button["border"] = "1"
 
 
 # Combo-Box: 
@@ -110,6 +112,7 @@ combo_box = ttk.Combobox(window,
                 "Official KMU 2010"],
                 width=16,
                 state="readonly")
-combo_box.place(x=415, y=310)
+combo_box.place(x=626, y=310)
 combo_box.current(0)
+convert_func()
 window.mainloop()
