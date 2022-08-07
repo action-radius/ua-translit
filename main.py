@@ -90,15 +90,6 @@ copying_button = Button(window,
 copying_button.place(x=25, y=308, width=90, height=38)
 copying_button["border"] = "1"
 
-# translate_button = Button(window, 
-#                 font=('Cantarell', 14, 'normal'),
-#                 command=convert_func,
-#                 bg="#e3e3e3",
-#                 text="Convert",
-#                 fg="black")
-# translate_button.place(x=122, y=308, width=80, height=38)
-# translate_button["border"] = "1"
-
 
 # Combo-Box: 
 combo_box = ttk.Combobox(window,
