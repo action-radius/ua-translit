@@ -1,34 +1,34 @@
 # Imports
-from latin.custom import custom, forCustom, forKMU2010
-from latin.TKPN_diac import TKPN_diac, for1994diac
-from latin.abecadło import abecadło, for_abecadło
-from latin.official_KMU_2010 import of_kmu
-from latin.NovaLatynka import NovaLatynka
-from latin.TKPN_combo import TKPN_combo
-from latin.TKPN_intl import TKPN_intl
-from latin.vowels import vowels
-from latin.iso9 import iso9
+from latin.ukr.customukr import custom_ukr, forCustom, forKMU2010
+from latin.ukr.TKPN_diac import TKPN_diac, for1994diac
+from latin.ukr.abecadło import abecadło, for_abecadło
+from latin.ukr.official_KMU_2010 import of_kmu
+from latin.ukr.NovaLatynka import NovaLatynka
+from latin.ukr.TKPN_combo import TKPN_combo
+from latin.ukr.TKPN_intl import TKPN_intl
+from latin.ukr.vowels import vowels
+from latin.ukr.iso9 import iso9
 
 def transliteration(choice, message):
     output = ""
-    lower_dictionary = custom
+    lower_dictionary = custom_ukr
     isPreviousLetterConsonant = False
 
-    if choice == "1":
-        lower_dictionary = custom
-    if choice == "2":
+    if choice == "Custom": #1
+        lower_dictionary = custom_ukr
+    if choice == "ISO9": #2
         lower_dictionary = iso9
-    if choice == "3":
+    if choice == "Nova Latynka": #3
         lower_dictionary = NovaLatynka
-    if choice == "4":
+    if choice == "TKPN diac": #4
         lower_dictionary = TKPN_diac
-    if choice == "5":
+    if choice == "TKPN combo": #5
         lower_dictionary = TKPN_combo
-    if choice == "6":
+    if choice == "TKPN intl": #6
         lower_dictionary = TKPN_intl
-    if choice == "7":
+    if choice == "Abecadło": #7
         lower_dictionary = abecadło
-    if choice == "8":
+    if choice == "Official KMU 2010": #8
         lower_dictionary = of_kmu
 
     for index, i in enumerate(message):
@@ -45,30 +45,30 @@ def transliteration(choice, message):
                 isPreviousLetterConsonant = False
  
             ###########################################################
-            if choice == "1" or choice == "7":
+            if choice == "Custom" or choice == "Abecadło":
                 if len(l) == 2 and l[0].lower() == 'j':
                     if isPreviousLetterConsonant:
                         l = 'i' + l[1]
             ###########################################################
-            if choice == "1":
+            if choice == "Custom":
                 if lowered == "і" and nextLetter.lower() in forCustom:
                     l = "i'"
             ###########################################################
-            if choice == "4" or choice == "5" or choice == "6":
+            if choice == "TKPN diac" or choice == "TKPN combo" or choice == "TKPN intl":
                 if lowered == "й" and i != message[0]:
                     msg_m2 = message[index - 2]
                     if msg_m2.lower() in for1994diac and nextLetter.lower() == "о":
                         l = "'j"
             ###########################################################
-            if choice == "7" and lowered in for_abecadło:
+            if choice == "Abecadło" and lowered in for_abecadło:
                 if nextLetter.lower() == "ь":
                     l = for_abecadło[lowered]
             
-            if choice == "7" and lowered in forKMU2010:
+            if choice == "Abecadło" and lowered in forKMU2010:
                 if prevLetter.lower() == "ь":
                     l = abecadło[i]
             ###########################################################
-            if choice == "8":
+            if choice == "Official KMU 2010":
                 if len(l) > 1 and lowered in forKMU2010:
                     if i == message[0] or prevLetter == " ":
                         l = "y" + l[1]
