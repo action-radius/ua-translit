@@ -1,5 +1,7 @@
 # Imports
 from latin.ukr.customukr import custom_ukr, forCustom, forKMU2010
+from latin.ukr.jirečkivka import Jirečkivka, forJirečkivka
+from latin.ukr.psevdo_jirečkivka import psevdo_jirečkivka
 from latin.ukr.TKPN_diac import TKPN_diac, for1994diac
 from latin.ukr.abecadło import abecadło, for_abecadło
 from latin.ukr.official_KMU_2010 import of_kmu
@@ -20,16 +22,20 @@ def transliteration(choice, message):
         lower_dictionary = iso9
     if choice == "Nova Latynka": #3
         lower_dictionary = NovaLatynka
-    if choice == "TKPN diac": #4
+    if choice == "ТКПН diac": #4
         lower_dictionary = TKPN_diac
-    if choice == "TKPN combo": #5
+    if choice == "ТКПН combo": #5
         lower_dictionary = TKPN_combo
-    if choice == "TKPN intl": #6
+    if choice == "ТКПН intl": #6
         lower_dictionary = TKPN_intl
     if choice == "Abecadło": #7
         lower_dictionary = abecadło
-    if choice == "Official KMU 2010": #8
+    if choice == "Official КМУ 2010": #8
         lower_dictionary = of_kmu
+    if choice == "Їречківка": #9
+        lower_dictionary = Jirečkivka
+    if choice == "Псевдо-Їречківка": #10
+        lower_dictionary = Jirečkivka
 
     for index, i in enumerate(message):
         if index + 1 != len(message):
@@ -45,7 +51,7 @@ def transliteration(choice, message):
                 isPreviousLetterConsonant = False
  
             ###########################################################
-            if choice == "Custom" or choice == "Abecadło":
+            if choice == "Custom" or choice == "Abecadło" or choice == "Псевдо-Їречківка":
                 if len(l) == 2 and l[0].lower() == 'j':
                     if isPreviousLetterConsonant:
                         l = 'i' + l[1]
@@ -53,6 +59,10 @@ def transliteration(choice, message):
             if choice == "Custom":
                 if lowered == "і" and nextLetter.lower() in forCustom:
                     l = "i'"
+            
+            if choice == "Custom" and lowered in forKMU2010:
+                if prevLetter.lower() == "ь":
+                    l = custom_ukr[lowered]
             ###########################################################
             if choice == "TKPN diac" or choice == "TKPN combo" or choice == "TKPN intl":
                 if lowered == "й" and i != message[0]:
@@ -60,13 +70,15 @@ def transliteration(choice, message):
                     if msg_m2.lower() in for1994diac and nextLetter.lower() == "о":
                         l = "'j"
             ###########################################################
+            # s[сь] -> ś
             if choice == "Abecadło" and lowered in for_abecadło:
                 if nextLetter.lower() == "ь":
                     l = for_abecadło[lowered]
             
+            # śia -> śja
             if choice == "Abecadło" and lowered in forKMU2010:
                 if prevLetter.lower() == "ь":
-                    l = abecadło[i]
+                    l = abecadło[lowered]
             ###########################################################
             if choice == "Official KMU 2010":
                 if len(l) > 1 and lowered in forKMU2010:
@@ -80,6 +92,35 @@ def transliteration(choice, message):
                 if lowered == "й":
                     if i == message[0] or prevLetter == " ":
                         l = "y"
+            ###########################################################
+            if choice == "Їречківка":
+                if nextLetter.lower() == "ь":
+                    if lowered in forJirečkivka:
+                        l = forJirečkivka[lowered]
+                if nextLetter.lower() in forKMU2010:
+                    if lowered in forJirečkivka:
+                        l = forJirečkivka[lowered]
+                if prevLetter.lower() in forJirečkivka:
+                    if lowered in forKMU2010:
+                        if lowered == "я":
+                            l = forCustom[0]
+                        if lowered == "є":
+                            l = forCustom[1]
+                        if lowered == "ю":
+                            l = forCustom[2]
+            ###########################################################
+            if choice == "Псевдо-Їречківка":
+                if nextLetter.lower() == "ь":
+                    if message[index + 1].lower() != "о":
+                        if lowered in forJirečkivka:
+                                l = forJirečkivka[lowered]
+
+                if lowered == "ь" and nextLetter.lower() == "о":
+                    l = "i"
+                
+                if choice == "Псевдо-Їречківка" and lowered in forKMU2010:
+                    if prevLetter.lower() == "ь":
+                        l = psevdo_jirečkivka[lowered]
             ###########################################################
  
             isPreviousLetterConsonant = lowered not in vowels
