@@ -11,6 +11,7 @@ os.system('clear')
 
 # Functions: 
 def convert_func():
+    t = Timer(0.01, convert_func)
     if tabControl.tab(tabControl.select(), "text") == "Ukrainian":
         # combo-box value getting: 
         c_box_ua = combo_boxukr.get()
@@ -32,14 +33,14 @@ def convert_func():
         text2_blr.delete(1.0, 'end')
         text2_blr.insert(1.0, out)
         text2_blr.configure(state='disabled')
-    Timer(0.01, convert_func).start()
+    t.start()
 
 def copy_button():
     text = text2_ukr.get(1.0, 'end')
     pyperclip.copy(text)
 
 
-# Window config.: 
+# Window config.:
 window = Tk()
 window.geometry("800x370")
 window.resizable(0, 0)
@@ -50,8 +51,8 @@ window.title("Translit")
 
 window.config(background="white")
 
-# Tabs: 
 
+# Tabs: 
 tabControl = ttk.Notebook(window)
 tab1 = ttk.Frame(tabControl)
 tab2 = ttk.Frame(tabControl)
@@ -66,29 +67,25 @@ tabControl.pack(expand = 1, fill ="both")
 label_ukr = Label(tab1, 
                 text="Транслітерація з кирилиці на латиницю.", 
                 font=('Cantarell', 14, 'normal'), 
-                fg='black', 
-                bg='white')
+                fg='black')
 label_ukr.place(x=8, y=5)
 
 label_blr = Label(tab2, 
                 text="Транслітарацыя з кірыліцы на лацінку.", 
                 font=('Cantarell', 14, 'normal'), 
-                fg='black', 
-                bg='white')
+                fg='black')
 label_blr.place(x=8, y=5)
 
 label2_ukr = Label(tab1, 
                 text="Обери латинику тут: ", 
                 font=('Cantarell', 14, 'normal'), 
-                fg='black', 
-                bg='white')
+                fg='black')
 label2_ukr.place(x=424, y=303)
 
 label2_blr = Label(tab2, 
                 text="Абярыце лацінку тут: ", 
                 font=('Cantarell', 14, 'normal'), 
-                fg='black', 
-                bg='white')
+                fg='black')
 label2_blr.place(x=424, y=303)
 
 
@@ -115,7 +112,7 @@ text2_blr.place(x=25, y=170, width=747, height=120)
 
 
 # Icon of copy button: 
-photo = PhotoImage(file = r"/home/artemiy/git_workspace/ua-translit/copy_btn_icon.png")
+photo = PhotoImage(file = r"./copy_btn_icon.png")
 photoimage = photo.subsample(5, 4)
 
 

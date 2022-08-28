@@ -35,7 +35,7 @@ abecadło = {
     "я": "ja"
 }
 
-for_abecadło = {
+soft_Abecadło = {
     "ц": "ć",
     "д": "ď",
     "л": "l",
