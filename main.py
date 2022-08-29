@@ -1,6 +1,6 @@
 # Imports: 
-from blrtranslit import blr_transliteration
-from translit import transliteration
+from blr_translit import blr_transliteration
+from ukr_translit import ukr_transliteration
 from threading import Timer
 from tkinter import *
 from tkinter import ttk
@@ -11,14 +11,13 @@ os.system('clear')
 
 # Functions: 
 def convert_func():
-    t = Timer(0.01, convert_func)
     if tabControl.tab(tabControl.select(), "text") == "Ukrainian":
         # combo-box value getting: 
         c_box_ua = combo_boxukr.get()
 
         textarea1 = text.get(1.0, 'end')
         # Choose latin using combo-box's value
-        out = transliteration(c_box_ua, textarea1)
+        out = ukr_transliteration(c_box_ua, textarea1)
         text2_ukr.configure(state='normal')
         text2_ukr.delete(1.0, 'end')
         text2_ukr.insert(1.0, out)
@@ -33,7 +32,8 @@ def convert_func():
         text2_blr.delete(1.0, 'end')
         text2_blr.insert(1.0, out)
         text2_blr.configure(state='disabled')
-    t.start()
+    threadin_timer = Timer(0.01, convert_func)
+    threadin_timer.start()
 
 def copy_button():
     text = text2_ukr.get(1.0, 'end')
@@ -56,8 +56,6 @@ window.config(background="white")
 tabControl = ttk.Notebook(window)
 tab1 = ttk.Frame(tabControl)
 tab2 = ttk.Frame(tabControl)
-# tabControl.add(tab1, text ='UKR')
-# tabControl.add(tab2, text ='BLR')
 tabControl.add(tab1, text ='Ukrainian')
 tabControl.add(tab2, text ='Belarusian')
 tabControl.pack(expand = 1, fill ="both")
@@ -77,7 +75,7 @@ label_blr = Label(tab2,
 label_blr.place(x=8, y=5)
 
 label2_ukr = Label(tab1, 
-                text="Обери латинику тут: ", 
+                text="Оберіть латинику тут: ", 
                 font=('Cantarell', 14, 'normal'), 
                 fg='black')
 label2_ukr.place(x=424, y=303)
@@ -123,9 +121,9 @@ copying_button = Button(window,
                 image=photoimage,
                 compound=LEFT,
                 bg="#e3e3e3",
-                text="copy",
+                text="Копія",
                 fg="black")
-copying_button.place(x=25, y=328, width=90, height=38)
+copying_button.place(x=25, y=324, width=90, height=38)
 copying_button["border"] = "1"
 
 
@@ -140,7 +138,8 @@ combo_boxukr = ttk.Combobox(tab1,
                 "Abecadło",
                 "Official КМУ 2010",
                 "Їречківка",
-                "Псевдо-Їречківка"],
+                "Псевдо-Їречківка",
+                "Latin only"],
                 width=16,
                 state="readonly")
 combo_boxukr.place(x=626, y=305)
