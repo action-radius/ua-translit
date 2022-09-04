@@ -81,13 +81,16 @@ def ukr_transliteration(choice, message):
 
                 case "Official КМУ 2010":
                     if len(l) > 1 and lowered in letters_for_KMU2010:
-                        if i == message[0] or prevLetter == " ":
+                        if i == message[0] or prevLetter == " " or prevLetter == "":
                             l = "y" + l[1]
 
                     yi_and_i = {"ї": "yi", "й": "y"}
                     if lowered in yi_and_i:
                         if i == message[0] or prevLetter == " ":
                             l = yi_and_i[lowered]
+                    
+                    if lowered == "г" and prevLetter.lower() == "з":
+                        l = "gh"
             
             # [lia] łia -> la
             if choice == "Abecadło":
