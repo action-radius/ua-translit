@@ -17,7 +17,7 @@ availableChoices = {
     "ТКПН intl": TKPN_intl,
     "Abecadło": abecadło,
     "Official КМУ 2010": official_kmu,
-    "Їречківка": Jirečkivka,
+    # "Їречківка": Jirečkivka,
     "Псевдо-Їречківка": psevdo_jirečkivka,
     "Latin only": latin_only
 }
@@ -31,7 +31,7 @@ soft_dictionary_hold = {
     "ТКПН intl": True,
     "Official КМУ 2010": True,
     "Abecadło": soft_Abecadło, 
-    "Їречківка": soft_Jirečkivka, 
+    # "Їречківка": soft_Jirečkivka, 
     "Псевдо-Їречківка": soft_Jirečkivka,
     "Latin only": True
 }
@@ -92,7 +92,7 @@ def ukr_transliteration(choice, message):
                     if lowered == "г" and prevLetter.lower() == "з":
                         l = "gh"
             
-            # [lia] łia -> la
+            # [lia] łia -> la [Abetsadlo]
             if choice == "Abecadło":
                 if nextLowered in letters_for_KMU2010 or nextLowered == "л" and message[index + 1] in letters_for_KMU2010: 
                     if lowered == "л": l = "l"
@@ -107,10 +107,10 @@ def ukr_transliteration(choice, message):
                 if nextLowered == "ь" and lowered in soft_dictionary:
                     l = soft_dictionary[lowered]
 
-                if choice == "Їречківка":
-                    # śa (ся) --first letter [ś]
-                    if nextLowered in letters_for_KMU2010 and lowered in soft_dictionary:
-                        l = soft_dictionary[lowered]
+                # if choice == "Їречківка":
+                #     # śa (ся) --first letter [ś]
+                #     if nextLowered in letters_for_KMU2010 and lowered in soft_dictionary:
+                #         l = soft_dictionary[lowered]
 
                     # śa (ся) --second letter [a]
                     if prevLetter.lower() in soft_dictionary and lowered in letters_for_KMU2010:

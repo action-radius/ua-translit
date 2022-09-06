@@ -1,4 +1,5 @@
 # Imports: 
+from lib2to3.pytree import convert
 from blr_translit import blr_transliteration
 from ukr_translit import ukr_transliteration
 from threading import Timer
@@ -32,8 +33,9 @@ def convert_func():
         text2_blr.delete(1.0, 'end')
         text2_blr.insert(1.0, out)
         text2_blr.configure(state='disabled')
-    threadin_timer = Timer(0.01, convert_func)
-    threadin_timer.start()
+    # threadin_timer = Timer(0.01, convert_func)
+    # threadin_timer.start()
+    window.after(10, convert_func)
 
 def copy_button():
     text = text2_ukr.get(1.0, 'end')
@@ -137,7 +139,7 @@ combo_boxukr = ttk.Combobox(tab1,
                 "ТКПН intl",
                 "Abecadło",
                 "Official КМУ 2010",
-                "Їречківка",
+                # "Їречківка",
                 "Псевдо-Їречківка",
                 "Latin only"],
                 width=16,
@@ -154,5 +156,5 @@ combo_boxblr = ttk.Combobox(tab2,
                 state="readonly")
 combo_boxblr.place(x=626, y=305)
 combo_boxblr.current(0)
-convert_func()
+window.after(10, convert_func)
 window.mainloop()
