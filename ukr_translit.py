@@ -6,6 +6,7 @@ from latin.ukr.abecadło import abecadło, soft_Abecadło
 from latin.ukr.official_KMU_2010 import official_kmu
 from latin.ukr.NovaLatynka import NovaLatynka
 from latin.ukr.latin_only import latin_only
+from latin.ukr.glagolicia import glagolycia
 from latin.ukr.iso9 import iso9
 
 availableChoices = {
@@ -18,6 +19,7 @@ availableChoices = {
     "Abecadło": abecadło,
     "Official КМУ 2010": official_kmu,
     # "Їречківка": Jirečkivka,
+    "Глаголиця": glagolycia,
     "Псевдо-Їречківка": psevdo_jirečkivka,
     "Latin only": latin_only
 }
@@ -33,6 +35,7 @@ soft_dictionary_hold = {
     "Abecadło": soft_Abecadło, 
     # "Їречківка": soft_Jirečkivka, 
     "Псевдо-Їречківка": soft_Jirečkivka,
+    "Глаголиця": True,
     "Latin only": True
 }
 
@@ -108,13 +111,13 @@ def ukr_transliteration(choice, message):
                     l = soft_dictionary[lowered]
 
                 # if choice == "Їречківка":
-                #     # śa (ся) --first letter [ś]
+                #     # śa (ся) --first letter [ś] ся sia
                 #     if nextLowered in letters_for_KMU2010 and lowered in soft_dictionary:
                 #         l = soft_dictionary[lowered]
 
-                    # śa (ся) --second letter [a]
-                    if prevLetter.lower() in soft_dictionary and lowered in letters_for_KMU2010:
-                        l = jeToE[lowered]
+                #     # śa (ся) --second letter [a] 
+                #     if prevLetter.lower() in soft_dictionary and lowered in letters_for_KMU2010:
+                #         l = jeToE[lowered]
 
             if choice == "Псевдо-Їречківка":
                 if nextLowered == "ь" and message[index + 1].lower() == "о":

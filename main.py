@@ -8,7 +8,6 @@ from tkinter import ttk
 import pyperclip
 import os
 
-os.system('clear')
 
 # Functions: 
 def convert_func():
@@ -33,8 +32,6 @@ def convert_func():
         text2_blr.delete(1.0, 'end')
         text2_blr.insert(1.0, out)
         text2_blr.configure(state='disabled')
-    # threadin_timer = Timer(0.01, convert_func)
-    # threadin_timer.start()
     window.after(10, convert_func)
 
 def copy_button():
@@ -49,8 +46,7 @@ window.resizable(0, 0)
 window.title("Translit")
 
 # icon = PhotoImage(file='dir_to_icon.png')
-# window.iconphoto(True, icon) # window icon
-
+# window.ico"Їречківка": Jirečkivka,nphoto(True, icon) # window icon
 window.config(background="white")
 
 
@@ -139,6 +135,7 @@ combo_boxukr = ttk.Combobox(tab1,
                 "ТКПН intl",
                 "Abecadło",
                 "Official КМУ 2010",
+                "Глаголиця",
                 # "Їречківка",
                 "Псевдо-Їречківка",
                 "Latin only"],
