@@ -1,12 +1,9 @@
 # Imports: 
-from lib2to3.pytree import convert
 from blr_translit import blr_transliteration
 from ukr_translit import ukr_transliteration
-from threading import Timer
 from tkinter import *
 from tkinter import ttk
 import pyperclip
-import os
 
 
 # Functions: 
